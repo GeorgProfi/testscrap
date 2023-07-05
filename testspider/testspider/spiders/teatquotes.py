@@ -7,8 +7,13 @@ class TeatquotesSpider(scrapy.Spider):
     start_urls = ["https://quotes.toscrape.com"]
 
     def start_requests(self):
-        url = "https://quotes.toscrape.com"
-        yield scrapy.Request(url, callback= self.parse)
+        start_page = 1
+        urls = []
+        for page in range(10): # на сайте 10 стр, по хорошему придумать метод нахождения количества стр
+            yield scrapy.Request(f"https://quotes.toscrape.com/page/{start_page}/", callback=self.parse)
+            start_page += 1
+
+
 
     def parse(self, response):
         for card in response.css("div.quote"):  # div[@class="quote"]
