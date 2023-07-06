@@ -9,7 +9,7 @@ class TeatquotesSpider(scrapy.Spider):
     def start_requests(self):
         start_page = 1
         urls = []
-        for page in range(10): # на сайте 10 стр, по хорошему придумать метод нахождения количества стр
+        for page in range(10): # на сайте 10 стр, по хорошему написать метод нахождения количества стр
             yield scrapy.Request(f"https://quotes.toscrape.com/page/{start_page}/", callback=self.parse)
             start_page += 1
 
